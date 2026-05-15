@@ -1,0 +1,176 @@
+\documentclass[11pt, oneside]{book}   	% use "amsart" instead of "article" for AMSLaTeX format
+\usepackage{geometry}                		% See geometry.pdf to learn the layout options. There are lots.
+\geometry{letterpaper}                   		% ... or a4paper or a5paper or ... 
+%\geometry{landscape}                		% Activate for for rotated page geometry
+%\usepackage[parfill]{parskip}    		% Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx}				% Use pdf, png, jpg, or eps§ with pdflatex; use eps in DVI mode
+								% TeX will automatically convert eps --> pdf in pdflatex		
+\usepackage{amsmath, amsthm, amssymb, amsfonts}
+\usepackage{mathabx}
+\usepackage{makeidx}
+\usepackage[symbol,perpage]{footmisc}
+\usepackage[pdftex,bookmarks=true,pdfborder={0 0 0},colorlinks=true,linkcolor=blue,citecolor=blue]{hyperref}
+\usepackage{setspace}
+
+\newtheorem{definition}{Definition}[chapter]
+\newtheorem{example}{Example}[chapter]
+\newtheorem{remark}{Remark}[chapter]
+\newtheorem{lemma}{Lemma}[chapter]
+\newtheorem{corollary}{Corollary}[chapter]
+\newtheorem{proposition}{Proposition}[chapter]
+\newtheorem{axiom}{Axiom}[chapter]
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{problem}{Problem}[chapter]
+
+\newcommand{\paren}[1]{\left(#1\right)}
+\newcommand{\set}[1]{\left\{#1\right\}}
+\newcommand{\var}[1]{\mathrm{Var}\left(#1\right)}
+\newcommand{\cov}[1]{\mathrm{Cov}\left(#1\right)}
+
+\makeindex 
+
+\title{Probability Notes}
+\author{Michael Conlen}
+%\date{}							% Activate to display a given date or no date
+
+\begin{document}
+\frontmatter
+\maketitle
+\tableofcontents
+\setcounter{tocdepth}{4}
+
+\mainmatter
+\begin{spacing}{1.618}
+\chapter{Introduction to Probability}
+	\section{Probability Spaces}
+		\begin{definition}[Probability Space]\index{probability space}
+			A probability space is a measure space such that the measure of the entire space is equal to one. We denote the space $(\Omega, \mathcal{F}, P)$ or alternatively $(S, E, P)$ where
+			\begin{itemize}
+				\item $\Omega$ is an arbitrary non-empty set called the \emph{sample space}\index{sample space}. 
+				\item $\mathcal{F}$ is the $\sigma$-algebra called the \emph{event space}\index{event space} where elements of $\mathcal{F}$ are called \emph{events}\index{events}. 
+				\item The measure $P:\mathcal{F} \to [0, 1]$ is called the \emph{probability}\index{probability}. 
+			\end{itemize}
+		\end{definition}
+	
+		\begin{remark}[Measure Space]\index{measure space}
+			Since a probability space is a measure space we note that $F$ contains the entire space and is closed under complements and countable unions. The probability measure $P$ is countably additive (also called $sigma$-additive and the measure of the entire space is one. 
+		\end{remark}
+
+	\section{Axioms of Probability}	
+		\begin{definition}[Axioms of Probability]\index{axioms of probability}
+			There are three axioms of probability which hold true in any probability space
+			\begin{axiom}
+				For every event $A\subset \mathcal{F}$, $P(A) \geq 0$. 		
+			\end{axiom} 
+			\begin{axiom}
+				For every sample space $\Omega$, $P(\Omega)=1$. 
+			\end{axiom}
+			\begin{axiom}
+				For every infinite sequence of disjoint events $A_1, A_2, \dots$, 
+				\begin{alignat}{4}
+					P\left(\bigcup_{i=1}^\infty A_i\right)=\sum_{i=1}^\infty P(A_i)
+				\end{alignat}
+			\end{axiom}
+		\end{definition}
+
+	\section{Useful Corollaries}
+	
+		\begin{theorem}
+			$P(\emptyset)=0$		
+		\end{theorem}
+		\begin{theorem}
+			For every finite sequence of $n$ disjoint events $A_1, A_2, \dots, A_n$, 
+				\begin{alignat}{4}
+					P\left(\bigcup_{i=1}^n A_i\right)=\sum_{i=1}^n P(A_i)
+				\end{alignat}
+		\end{theorem}
+		\begin{theorem}
+			For every event $A$, $P(A^c)=1-P(A)$. 
+		\end{theorem}
+		
+		\begin{theorem}
+			If $A\subset B$ then $P(A)\leq P(B)$. 
+		\end{theorem}
+		
+		\begin{theorem}
+			For every event $A$, $0\leq A\leq 1$. 
+		\end{theorem}
+		
+		\begin{theorem}
+			For every two events $A$ and $B$, 
+			\begin{alignat}{4}
+				P(A\cap B^c)=P(A)-P(A\cap B)
+			\end{alignat}
+		\end{theorem}
+		
+		\begin{theorem}\label{Theorem:1:1}
+			For every two events $A$ and $B$, 
+			\begin{alignat}{4}
+				P(A \cup B) = P(A)+P(B)-P(A\cap B)
+			\end{alignat}
+		\end{theorem}
+		
+		\begin{remark}
+			Theorem \ref{Theorem:1:1} says that the probability of a union of events is equal to their sum minus their intersection. 
+		\end{remark}
+		
+		\begin{theorem}[Bonferroni Inequality]\index{Bonferroni inequality}
+			For rall events $A_1, A_2, \dots, A_n$, 
+			\begin{alignat}{4}
+				P(\left(\bigcup_{i=1}^n A_i\right) \leq \sum_{i=1}^nP(A_i)
+			\end{alignat}
+			and
+			\begin{alignat}{4}
+				P(\left(\bigcap{i=1}^n A_i\right) \geq 1-\sum_{i=1}^nP(A_i^c)
+			\end{alignat}
+		\end{theorem}
+\chapter{Conditional Probabilities}
+	\section{Definition of Conditional Probability}
+	
+		\begin{definition}[Conditional Probability]\index{conditional probability}
+			Suppose we know that some event $B$ occurred and we wish to know the probability that some other event $A$ has occurred; further assume that $P(B)>0$, then we define the \emph{conditional probability} of $A$ given $B$ as 
+			\begin{alignat}{4}
+				P(A\mid B) = \frac{P(A\cap B)}{P(B)}
+			\end{alignat}
+			NB: If $P(B)=0$ then $P(A\mid B)$ is undefined. 
+		\end{definition}
+		
+		\begin{theorem}
+			Let $A$ and $B$ be events and $P(B)>0$, then
+			\begin{alignat}{4}
+				P(A\cap B)=P(B)P(A\mid B)
+			\end{alignat}
+			and if $P(A)>0$, then 
+			\begin{alignat}{4}
+				P(A\cap B)=P(A)P(B\mid A)
+			\end{alignat}
+		\end{theorem}
+	\section{Partitions}
+	
+
+		\begin{definition}[Partition]\index{partition}
+			Let $\Omega$ be a sample space and let $A_1, A_2, \dots, A_k$ be a set of $k$ events such that $A_i \cap A_j = \emptyset$ for all $i$, $j$ and that $\bigcup_{i=1}^k A_i = \Omega$; then we say that $\left\{A_i\right\}_{i=1}^k$ form a \emph{partition} of $\Omega$
+		\end{definition}
+		
+		\begin{theorem}[Law of total probability]\index{law of total probability}
+			Suppose that $\set{B_i}_{i=1}^k$ partition $\Omega$ and that $P(B_i)>0$ for all $0<i<k$; then for every event $A$
+			\begin{alignat}{4}
+				P(A)=\sum_{i=1}^kP(B_i)P(A\mid B_i)
+			\end{alignat}
+		\end{theorem}
+
+	\section{Independent Events}
+	
+		\begin{definition}[Independent Event]\index{independent events}
+			Two events, $A$ and $B$ are \emph{independent} if $P(A\cap B) = P(A)P(B)$. 
+		\end{definition}
+		
+		\begin{theorem}
+			If two events $A$ and $B$ are independent then $A$ and $B^c$ are also independent. 
+		\end{theorem}
+
+		
+
+\printindex
+\end{spacing}
+\end{document}  
