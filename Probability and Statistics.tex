@@ -51,10 +51,6 @@
 				\item The measure $P:\mathcal{F} \to [0, 1]$ is called the \emph{probability}\index{probability}. 
 			\end{itemize}
 		\end{definition}
-	
-		\begin{remark}[Measure Space]\index{measure space}
-			Since a probability space is a measure space we note that $F$ contains the entire space and is closed under complements and countable unions. The probability measure $P$ is countably additive (also called $sigma$-additive and the measure of the entire space is one. 
-		\end{remark}
 
 	\section{Axioms of Probability}	
 		\begin{definition}[Axioms of Probability]\index{axioms of probability}
@@ -72,6 +68,12 @@
 				\end{alignat}
 			\end{axiom}
 		\end{definition}
+
+		\begin{remark}[Measure Space]\index{measure space}
+			The definition of a probability space and the axioms of probability imply that the probability space is also a measure space with a measure $P$ on $\mathcal{F}$ and thus the theory of measure spaces apply (which is the point of the definition). 
+			
+			Note that in the definition of a measure space if at least one set has finite measure then the requirement that $P(\emptyset)=0$ is implied and that by the definition of a probability space all measures are finite. 
+		\end{remark}
 
 	\section{Useful Corollaries}
 	
@@ -124,6 +126,13 @@
 				P(\left(\bigcap{i=1}^n A_i\right) \geq 1-\sum_{i=1}^nP(A_i^c)
 			\end{alignat}
 		\end{theorem}
+		
+	\section{Set Theory}
+	
+		\begin{definition}[Mutually Exclusive]\index{mutually exclusive}
+			Let $A$ and $B$ be events; we say that $A$ and $B$ are \emph{mutually exclusive} if and only if $A\cap B=\emptyset$. The family of sets $\set{A_\alpha}_{\alpha \in I}$ indexed by an arbitrary index set $I$ (regardless of cardinality) is mutually exclusive whenever $A_\alpha \cap A_\beta = \emptyset$ for all $\alpha \neq \beta$.  
+		\end{definition}
+		
 \chapter{Conditional Probabilities}
 	\section{Definition of Conditional Probability}
 	
@@ -163,12 +172,263 @@
 	
 		\begin{definition}[Independent Event]\index{independent events}
 			Two events, $A$ and $B$ are \emph{independent} if $P(A\cap B) = P(A)P(B)$. 
+
+			We say that a finite collection of events $\set{A_k}{k=1}^n$ are independent if, for every sub-collection $\set{A_{i_k}}_{k=1}^j$ of $j$ of these events $(j=2,~3,~, \dots, k)$,
+			\begin{alignat}{4}
+				P\left(\bigcap_{k=1}^j A_{i_k}\right) = \prod_{k=1}^j P(A_{i_k})
+			\end{alignat}
+
 		\end{definition}
 		
 		\begin{theorem}
 			If two events $A$ and $B$ are independent then $A$ and $B^c$ are also independent. 
 		\end{theorem}
 
+		\begin{theorem}
+			Let $n>1$ and $\set{A_k}_{k=1}^n$ be events that are mutually exclusive. The events are also mutually independent if and only if all the events except possibly one of them has probability $0$. 
+		\end{theorem}
+		
+	
+		
+		\begin{definition}[Conditional Independence]\index{conditional independence}\index{independence!conditional}
+			We say that a finite collection of events $\set{A_k}{k=1}^n$ are conditionally independent given $B$ if for every subcollection $\set{A_{i_k}}_{k=1}^j$ of $j$ of these events $(j=2,~3,~, \dots, k)$,
+			\begin{alignat}{4}
+				P\left(\bigcap_{k=1}^j A_{i_k}\mid B\right) = \prod_{k=1}^j P(A_{i_k}\mid B)
+			\end{alignat}
+		\end{definition}
+		
+		\begin{theorem}
+			Suppose that $A_1$, $A_2$ and $B$ are events with $P(A_1\cap B)>0$, then $A_1$ and $A_2$ are conditionally independent given $B$ if and only if $P(A_2\mid A_1\cap B)=P(A_2\mid B)$. 
+			\begin{proof}
+				Suppose $A_1$ and $A_2$ are conditionally independent given $B$ then 
+				\begin{alignat}{4}
+					&P(A_1\cap A_2\mid B)&=P(A_1\mid B)P(A_2\mid B) \\
+					\implies & P(A_1\cap A_2\mid B)&=\frac{P(A_1\cap B)}{P(B)}P(A_2\mid B)
+				\end{alignat}
+				by the definition of conditional probability on $P(A_1\mid B)$ noting that $P(A_1\cap B)>0\implies P(B)>0$. We ca rearrange to write 
+				\begin{alignat}{4}
+					P(A_2\mid B)=\frac{P(A_1\cap A_2\mid B)P(B)}{P(A_1\cap B)}
+				\end{alignat}
+				Again using the definition of conditional probaiblity on $P(A_1\cap A_2\mid B)$ we write
+				\begin{alignat}{4}
+					&P(A_2\mid B)=\frac{P(A_1\cap A_2\cap B)P(B)}{P(A_1\cap B)P(B)} \\
+					\implies & P(A_2\mid B)=\frac{P(A_1\cap A_2\cap B)}{P(A_1\cap B)} \label{Eqn:2:1}
+				\end{alignat}
+				Since intersection is associative we can rewrite $P(A_1\cap A_2\cap B)$ as $P(A_2 \cap (A_1\cap B))$ and using the definition of conditional probability write 
+				\begin{alignat}{4}
+					\frac{P(A_2 \cap (A_1\cap B))}{P(A_1\cap B)} &= P(A_2\mid A_1\cap B) \label{Eqn:2:2}
+				\end{alignat}
+				Combining \ref{Eqn:2:1} and \ref{Eqn:2:2} we conclude
+				\begin{alignat}{4}
+					P(A_2\mid B)&=P(A_2\mid A_1\cap B)
+				\end{alignat}
+				
+				Conversely, suppose that $P(A_2\mid B)=P(A_2\mid A_1\cap B)$; we wish to show that $A_1$ and $A_2$ are conditionally independent given $B$; that is 
+				\begin{alignat}{4}
+					P(A_1\cap A_2\mid B)=P(A_1\mid B)P(A_2\mid B)
+				\end{alignat}
+				noting this implies 
+				\begin{alignat}{4}
+					P(A_2\mid B)=\frac{P(A_1\cap A_2\mid B)}{P(A_1\mid B)}
+				\end{alignat}
+				we make the previous argument in reverse and we compute
+				\begin{alignat}{4}
+					P(A_2\mid B)&= P(A_2\mid A_1\cap B)  \\
+						&= \frac{P(A_1\cap A_2\cap B)}{P(A_1\cap B)} \\
+						&=\frac{P(A_1\cap A_2\cap B)}{P(A_1\cap B)} \frac{P(A_1\mid B)}{P(A_1\mid B)} \\
+						&=\frac{P(A_1\mid B)}{P(A_1\cap B)}\frac{P(A_1\cap A_2\cap B)}{P(A_1\mid B)} \\
+						&=\frac{P(A_1\mid B)}{P(B)P(A_1\mid B)}\frac{P(A_1\cap A_2\cap B)}{P(A_1\mid B)} \\
+						&=\frac{1}{P(B)}\frac{P(A_1\cap A_2\cap B)}{P(A_1\mid B)} \\
+						&=\frac{1}{P(B)}\frac{P(B)P(A_1\cap A_2\mid B)}{P(A_1\mid B)} \\
+						&=\frac{P(A_1\cap A_2\mid B)}{P(A_1\mid B)}
+				\end{alignat}
+				noting that we use $P(A_\cap B)=P(B)P(A\mid B)$ as an alternate form of the definition of conditional probability where $A=A_1\cap A_2$ and that $P(A_1\cap B)>0$ guarantees that $P(A_1\cap B)$, $P(B)$ and $P(A_1\mid B)$ in the denominators are non-zero. 
+			\end{proof}
+		\end{theorem}
+	
+	\section{Bayes' Theorem}\index{Bayes' theorem}
+
+		\begin{theorem}[Bayes' Theorem]\index{Bayes' theorem}
+			Let the vents $\set{B_j}_{j=1}^n$ form a partition of the space $\Omega$ such that $P(B_j)>0$ for $j=1,\dots, k$ and let $A$ be an event such that $P(A)>0$. Then, for $j=1, \dots, k$,
+			\begin{alignat}{4}
+				P(B_i\mid A)=\frac{P(B_i)P(A\mid B_i)}{\sum_{j=1}^kP(B_j){(A\mid B_j)}}
+			\end{alignat}
+		\end{theorem}
+
+\chapter{Random Variables and Distributions}
+	\section{Random Variables and Discrete Distributions}
+		\begin{definition}[Random Variable]\index{random variable}
+			Let $\Omega$ be a sample space; then a \emph{random variable} $X$ is a measurable function from $(\Omega, \mathcal{F})$ to $(S, \Sigma)$ where the latter is a measure space. 
+		\end{definition}
+		
+		\begin{remark}
+			A random variable $X$ is most commonly a real number and the measure space is $(\mathbb{R}, \mathcal{B}(\mathbb{R}))$ where $\mathcal{B}(\mathbb{R})$ is the borel $\sigma$-algebra of $\mathbb{R}$. Many common properties of random variables cease to make sense if it isn't. One consequence is that singletons are measurable so it makes sense to talk about $X=5$. This need not be the case for more general random variables. 
+		\end{remark}
+		
+		\begin{remark}
+			That $X : (\Omega, \mathcal{F}, P) \to (S, \Sigma)$ is measurable implies that if $A\in\Sigma$ then $X^{-1}(A)\in\mathcal{F}$. This is important in the definition of distributions. 
+		\end{remark}
+
+		\begin{definition}
+			Let $X : (\Omega, \mathcal{F}, P) \to (S, \Sigma)$ and let $A\in\Sigma$ then 
+			\begin{alignat}{4}
+				P(X\in A)=P(\set{\omega\in\Omega\mid X(\omega)\in A})
+			\end{alignat}
+			and 
+			\begin{alignat}{4}
+				P(X=x)=P(\set{\omega\in\Omega\mid X(\omega) = x}) \label{Eqn:3:1}
+			\end{alignat}
+			noting that equation \ref{Eqn:3:1} need not make sense when the random variable is not Borel-measurable. 
+		\end{definition}
+		
+		\begin{definition}[Distribution]\index{distribution}
+			Let $X$ be a random variable $X:(\Omega, \mathcal{F}, P)\to (S, \Sigma)$; the \emph{Distribution} of $X$ is the probability measure $\mu_X$ on $(S, \Sigma)$ defined by $A\in\Sigma$, $\mu_X(A)=P(X^{-1}(A))$.  
+		\end{definition}
+		
+		\begin{definition}[Discrete Distribution]\index{distribution!discrete}
+			Let $X$ be a random variable, we say that $X$ has a discrete distribution if $X$ takes on a countable number of values. 
+		\end{definition}
+		
+		\begin{definition}[Continuous Distribution]\index{distribution!continuous}
+			Let $X$ be a random variable, we say that $X$ has a continuous distribution if $X$ is not discrete. 
+		\end{definition}
+
+		\begin{definition}[Probability Function]\index{probability function}\index{probability mass function}
+			Let $X$ be a random variable with a discrete distribution; the probability function is the function $f$ defined by 
+			\begin{alignat}{4}
+				f(x)&=P(X=x) \\
+					&=P(X^{-1}(\set{x}))
+			\end{alignat}
+		\end{definition}
+		
+		\begin{definition}[Support]\index{support}
+			Let $X$ be a discrete random variable with distribution $\mu_X=P(X=x)$, then the support of $X$ is the closure of the set $\set{x\mid \mu_X(x)>0}$. 
+		\end{definition}
+
+		\begin{definition}[Bernoulli Random Variable]\index{Bernoulli random variable}\index{random variable!Bernoulli}
+			A random variable $Z$ that takes only two values; 0 and 1, with $P(Z=1)=p$ has the \emph{Bernoulli distribution} with parameter $p$. 
+		\end{definition}
+		
+		\begin{definition}[Uniform Random Variable on Integers]\index{uniform random variable}\index{random variable!uniform}
+			Let $a\leq b$ be integers and $X$ a random variable that is equally likely to take on each of the integers $a, \dots, b$; then we say that $X$ has the \emph{uniform distribution on the integers} $a, \dots, b$. 
+		\end{definition}
+		
+		\begin{theorem}
+			If $X$ has the uniform distribution on the integers $a, \dots, b$; then the probability function of $X$ is 
+			\begin{alignat}{4}
+				\mu_X(x)=\begin{cases}
+					\frac{1}{b-a+1}, & x \in \{a, \dots, b\}, \\
+					0, & \text{otherwise}.
+				\end{cases}
+			\end{alignat}
+		\end{theorem}
+		
+		\begin{definition}[Binomial Random Variable]\index{random variable!binomial}
+			A discrete random variable with distribution function given by 
+			\begin{alignat}{4}
+				\mu_X(x)=\begin{cases}
+					\binom{n}{x} p^x(1-p)^{n-x} & \textrm{for $x=0, 1, \dots, n$}, \\
+					0 & \textrm{otherwise}.
+				\end{cases}
+			\end{alignat}
+			is called a \emph{binomial random variable} with parameters $n$ and $p$. 
+		\end{definition}
+		
+		\begin{remark}
+			The binomial random variable with parameters $n$ and $p$ arrises when you have a sequence of $n$ Bernoulli random variables with probability $p$ of success and the random binomial random variable gives the probability of observing precisely $x$ successes. 
+		\end{remark}
+
+	\section{Continuous Random Variables}
+	
+		\subsection{The Probability Density Function}
+			
+			\begin{definition}[Continuous Random Variable]\index{random variable!continuous}
+				We say that a random variable $X$ is a \emph{continuous random variable} if there exists a nonnegative function $\mu_X$, defined on $\mathbb{R}$ such that for every interval of real numbers the probability that $X$ takes a value in the interval is
+				\begin{alignat}{4}
+					P(a\leq X \leq b)=\int_a^bf(x)dx
+				\end{alignat}
+			\end{definition}
+			
+			\begin{definition}[Probability Density Function]\index{probability density function}
+				If $X$ is a continuous random variable the function $f$ in the definition of a continuous random variable is known as the \emph{probability density function}. 
+			\end{definition}
+
+	\section{The Cumulative Distribution Function}
+	
+		\begin{definition}[Distribution Function]\index{distribution function}\index{cumulative distribution function}
+			The \emph{distribution function} or \emph{cumulative distribution function} of a real random variable $X$ is the function 
+			\begin{alignat}{4}
+				F(x)=P(X\leq x)
+			\end{alignat}
+		\end{definition}	
+
+		\begin{theorem}
+			A distribution function is non-decreasing
+		\end{theorem}
+		
+		\begin{theorem}
+			For a distribution function $F$, $\lim_{x\to-\infty}F(x)=0$ and $\lim_{x\to\infty}F(x)=1$
+		\end{theorem}
+
+		\begin{theorem}
+			Distribution functions are continuous from the right.
+		\end{theorem}
+		
+		\begin{remark}
+			A remarkable number of computations are made easy by the Fundamental Theorem of Calculus. 
+		\end{remark}
+
+		\begin{theorem}
+			Let $X$ have a continuous distribution with density $f$ and distribution $F$, then $F$ is continuous and 
+			\begin{alignat}{4}
+				F(x)=\int_{\mathbb{R}}f(t)dt
+			\end{alignat}
+			and
+			\begin{alignat}{4}
+				\frac{dF(x)}{dt} = f(x)
+			\end{alignat}
+		\end{theorem}
+
+		\begin{definition}[Quantiles]\index{quantiles}\index{Percentiles}
+			Let $X$ be a random variable with CDF $F$. For each $p\in(0, 1)$, define $Q(p)$ to be the smallest value $x$ such that $F(x) \geq p$. This $Q(p)$ is called the $p$ \emph{quantile} of $X$ or the $100p$ \emph{percentile} of $X$. The function $Q:(0, 1)\to \mathbb{R}$ is the \emph{quantile function}\index{quantile function}. 
+		\end{definition}
+		
+		\begin{definition}[Median]\index{median}
+			The median of a random variable $X$ is the 0.5 quantile or 50th percentile. 
+		\end{definition}
+		
+		\begin{remark}
+			The median is special in that there is an alternative definition of the median. While the 50th percentile is the smallest value $x$ such that $F(x)\geq p$ it may be that there's an interval of values such that $F(x)=p$. In that case some people take the middle of the interval to be the median. 
+		\end{remark}
+		
+		
+	\section{Bivariate Distributions}
+		\begin{definition}[Joint Distribution]\index{joint distribution}\index{distribution!joint}
+			Let $(\Omega, \mathcal{F}, P)$ be a probability space and let $X, Y$ be two real random variables on $\Omega$; then the map $(X, Y): \Omega \to \mathbb{R}^2$ is measurable. For every Borel set $C\in\mathcal{B}{(\mathbb{R}^2)}$ the preimage $\set{(X, Y)\in C} = \set{\omega\in\Omega\mid (X(\omega), Y(\omega))\in C)}\in\mathcal{F}$ is an event. 
+			
+			The \emph{joint distribution} of $X$ and $Y$ is the probability measure $\mu_{X, Y}$ on $(\mathbb{R}^2, \mathcal{B}(\mathbb{R}^2))$ defined by 
+			\begin{alignat}{4}
+				\mu_{X, Y}(C) = P(\set{(X, Y)\in C})
+			\end{alignat}
+			for $C\in\mathcal{B}(\mathbb{R}^2)$
+		\end{definition}
+
+
+
+\chapter{Estimation}
+
+	\section{Statistical Inference}
+	
+		\begin{definition}[Statistical Model]\index{statistical model}
+			A \emph{statistical model} consists of
+			\begin{itemize}
+				\item an identification of random variables of interest
+				\item a specification of a join distribution or family of possible joint distributions for the observable random variables 
+				\item the identification of any parameters of those distributions that are assumed unknown and possibly hypothetically observable
+				\item and if desired, a specification for the (joint) distribution for the unknown parameter(s)
+			\end{itemize}
+			When we treat the unknown parameters $\theta$ as random, then the joint distribution of the observable random variables indexed by $\theta$ is understood as the conditional distribution of the observable random variables given $\theta$. 
+		\end{definition}
 		
 
 \printindex
