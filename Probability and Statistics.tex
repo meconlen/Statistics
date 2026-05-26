@@ -605,6 +605,34 @@
 									&=\frac{5}{16}-\frac{1}{256} \\
 									&=\frac{79}{256}
 							\end{alignat}
+						\item For $P(Y\leq X+1)$ we need to consider two areas, for $x<0$ we have $y=x+1$ as the upper bound and for $x\geq0$ we have $1-x^2$ as our upper bound. Again our density is $\frac{5}{4}\left(x^2+y\right)$. 
+						\begin{alignat}{4}
+							P(Y\leq X+1)&=\int_{-1}^0\int_{0}^{x+1}\frac{5}{4}\left(x^2+y\right)~dy~dx + \int_{0}^1\int_{0}^{1-x^2}\frac{5}{4}\left(x^2+y\right)~dy~dx
+						\end{alignat}
+						We compute each term separately 
+						\begin{alignat}{4}
+							\int_{-1}^0\int_{0}^{x+1}\frac{5}{4}\left(x^2+y\right)~dy~dx&=\int_{-1}^0 \frac{5}{4}\left[x^2y+\frac{1}{2}y^2\right]_{y=0}^{x+1} ~dx \\
+								&=\frac{5}{4}\int_{-1}^0\left(x^2(x+1)+\frac{1}{2}\left(x+1\right)^2\right)~dx \\
+								&=\frac{5}{8}\int_{-1}^0\left(2x^3+2x^2+x^2+2x+1\right)~dx \\
+								&=\frac{5}{8}\int_{-1}^0\left(2x^3+3x^2+2x+1\right)~dx \\
+								&=\frac{5}{8}\left[ \frac{2}{4}x^4 + x^3 + x^2+x \right]_{x=-1}^0 \\
+								&=\frac{5}{8}\left(-\frac{1}{2} + 1-1 +1\right) \\
+								&=\frac{5}{8}\frac{1}{2} \\
+								&=\frac{5}{16}
+						\end{alignat}
+						and
+						\begin{alignat}{4}
+							\int_{0}^1\int_{0}^{1-x^2} \frac{5}{4}\left(x^2+y\right)~dy~dx &= \frac{5}{4} \int_{0}^1 \left[x^2y+\frac{1}{2}y^2\right]_{y=0}^{1-x^2} ~dx \\
+								&=\frac{5}{8}\int_{0}^1\left[-x^4+1\right]~dx \\
+								&=\frac{5}{8}\left[-\frac{1}{5}x^5 + x\right]_{x=0}^1 \\
+								&=\frac{5}{8}\frac{4}{5} \\
+								&=\frac{1}{2}
+						\end{alignat}
+						and so 
+						\begin{alignat}{4}
+							P(Y\leq X+1) = \frac{5}{16} + \frac{1}{2} &= \frac{13}{16}
+						\end{alignat}
+						\item Since the curve is 1d $P(Y=X^2) = 0$
 					\end{enumerate}
 				\end{proof}
 			\end{problem}
