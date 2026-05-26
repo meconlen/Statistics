@@ -20,7 +20,7 @@
 \newtheorem{proposition}{Proposition}[chapter]
 \newtheorem{axiom}{Axiom}[chapter]
 \newtheorem{theorem}{Theorem}[chapter]
-\newtheorem{problem}{Problem}[chapter]
+\newtheorem{problem}{Problem}[section]
 
 \newcommand{\paren}[1]{\left(#1\right)}
 \newcommand{\set}[1]{\left\{#1\right\}}
@@ -56,7 +56,7 @@
 		\begin{definition}[Axioms of Probability]\index{axioms of probability}
 			There are three axioms of probability which hold true in any probability space
 			\begin{axiom}
-				For every event $A\subset \mathcal{F}$, $P(A) \geq 0$. 		
+				For every event $A\in \mathcal{F}$, $P(A) \geq 0$. 		
 			\end{axiom} 
 			\begin{axiom}
 				For every sample space $\Omega$, $P(\Omega)=1$. 
@@ -95,7 +95,7 @@
 		\end{theorem}
 		
 		\begin{theorem}
-			For every event $A$, $0\leq A\leq 1$. 
+			For every event $A$, $0\leq P(A)\leq 1$. 
 		\end{theorem}
 		
 		\begin{theorem}
@@ -117,13 +117,13 @@
 		\end{remark}
 		
 		\begin{theorem}[Bonferroni Inequality]\index{Bonferroni inequality}
-			For rall events $A_1, A_2, \dots, A_n$, 
+			For all events $A_1, A_2, \dots, A_n$, 
 			\begin{alignat}{4}
-				P(\left(\bigcup_{i=1}^n A_i\right) \leq \sum_{i=1}^nP(A_i)
+				P\left(\bigcup_{i=1}^n A_i\right) \leq \sum_{i=1}^nP(A_i)
 			\end{alignat}
 			and
 			\begin{alignat}{4}
-				P(\left(\bigcap{i=1}^n A_i\right) \geq 1-\sum_{i=1}^nP(A_i^c)
+				P\left(\bigcap{i=1}^n A_i\right) \geq 1-\sum_{i=1}^nP(A_i^c)
 			\end{alignat}
 		\end{theorem}
 		
@@ -173,7 +173,7 @@
 		\begin{definition}[Independent Event]\index{independent events}
 			Two events, $A$ and $B$ are \emph{independent} if $P(A\cap B) = P(A)P(B)$. 
 
-			We say that a finite collection of events $\set{A_k}{k=1}^n$ are independent if, for every sub-collection $\set{A_{i_k}}_{k=1}^j$ of $j$ of these events $(j=2,~3,~, \dots, k)$,
+			We say that a finite collection of events $\set{A_k}_{k=1}^n$ are independent if, for every sub-collection $\set{A_{i_k}}_{k=1}^j$ of $j$ of these events $(j=2,~3,~, \dots, k)$,
 			\begin{alignat}{4}
 				P\left(\bigcap_{k=1}^j A_{i_k}\right) = \prod_{k=1}^j P(A_{i_k})
 			\end{alignat}
@@ -191,7 +191,7 @@
 	
 		
 		\begin{definition}[Conditional Independence]\index{conditional independence}\index{independence!conditional}
-			We say that a finite collection of events $\set{A_k}{k=1}^n$ are conditionally independent given $B$ if for every subcollection $\set{A_{i_k}}_{k=1}^j$ of $j$ of these events $(j=2,~3,~, \dots, k)$,
+			We say that a finite collection of events $\set{A_k}_{k=1}^n$ are conditionally independent given $B$ if for every subcollection $\set{A_{i_k}}_{k=1}^j$ of $j$ of these events $(j=2,~3,~, \dots, k)$,
 			\begin{alignat}{4}
 				P\left(\bigcap_{k=1}^j A_{i_k}\mid B\right) = \prod_{k=1}^j P(A_{i_k}\mid B)
 			\end{alignat}
@@ -205,7 +205,7 @@
 					&P(A_1\cap A_2\mid B)&=P(A_1\mid B)P(A_2\mid B) \\
 					\implies & P(A_1\cap A_2\mid B)&=\frac{P(A_1\cap B)}{P(B)}P(A_2\mid B)
 				\end{alignat}
-				by the definition of conditional probability on $P(A_1\mid B)$ noting that $P(A_1\cap B)>0\implies P(B)>0$. We ca rearrange to write 
+				by the definition of conditional probability on $P(A_1\mid B)$ noting that $P(A_1\cap B)>0\implies P(B)>0$. We can rearrange to write 
 				\begin{alignat}{4}
 					P(A_2\mid B)=\frac{P(A_1\cap A_2\mid B)P(B)}{P(A_1\cap B)}
 				\end{alignat}
@@ -242,27 +242,27 @@
 						&=\frac{1}{P(B)}\frac{P(B)P(A_1\cap A_2\mid B)}{P(A_1\mid B)} \\
 						&=\frac{P(A_1\cap A_2\mid B)}{P(A_1\mid B)}
 				\end{alignat}
-				noting that we use $P(A_\cap B)=P(B)P(A\mid B)$ as an alternate form of the definition of conditional probability where $A=A_1\cap A_2$ and that $P(A_1\cap B)>0$ guarantees that $P(A_1\cap B)$, $P(B)$ and $P(A_1\mid B)$ in the denominators are non-zero. 
+				noting that we use $P(A\cap B)=P(B)P(A\mid B)$ as an alternate form of the definition of conditional probability where $A=A_1\cap A_2$ and that $P(A_1\cap B)>0$ guarantees that $P(A_1\cap B)$, $P(B)$ and $P(A_1\mid B)$ in the denominators are non-zero. 
 			\end{proof}
 		\end{theorem}
 	
 	\section{Bayes' Theorem}\index{Bayes' theorem}
 
 		\begin{theorem}[Bayes' Theorem]\index{Bayes' theorem}
-			Let the vents $\set{B_j}_{j=1}^n$ form a partition of the space $\Omega$ such that $P(B_j)>0$ for $j=1,\dots, k$ and let $A$ be an event such that $P(A)>0$. Then, for $j=1, \dots, k$,
+			Let the events $\set{B_j}_{j=1}^k$ form a partition of the space $\Omega$ such that $P(B_j)>0$ for $j=1,\dots, k$ and let $A$ be an event such that $P(A)>0$. Then, for $j=1, \dots, k$,
 			\begin{alignat}{4}
-				P(B_i\mid A)=\frac{P(B_i)P(A\mid B_i)}{\sum_{j=1}^kP(B_j){(A\mid B_j)}}
+				P(B_i\mid A)=\frac{P(B_i)P(A\mid B_i)}{\sum_{j=1}^kP(B_j)P(A\mid B_j)}
 			\end{alignat}
 		\end{theorem}
 
 \chapter{Random Variables and Distributions}
 	\section{Random Variables and Discrete Distributions}
 		\begin{definition}[Random Variable]\index{random variable}
-			Let $\Omega$ be a sample space; then a \emph{random variable} $X$ is a measurable function from $(\Omega, \mathcal{F})$ to $(S, \Sigma)$ where the latter is a measure space. 
+			Let $\Omega$ be a sample space; then a \emph{random variable} $X$ is a measurable function from $(\Omega, \mathcal{F})$ to $(S, \Sigma)$ where the latter is a measureable space. 
 		\end{definition}
 		
 		\begin{remark}
-			A random variable $X$ is most commonly a real number and the measure space is $(\mathbb{R}, \mathcal{B}(\mathbb{R}))$ where $\mathcal{B}(\mathbb{R})$ is the borel $\sigma$-algebra of $\mathbb{R}$. Many common properties of random variables cease to make sense if it isn't. One consequence is that singletons are measurable so it makes sense to talk about $X=5$. This need not be the case for more general random variables. 
+			A random variable $X$ is most commonly a real number and the measureable space is $(\mathbb{R}, \mathcal{B}(\mathbb{R}))$ where $\mathcal{B}(\mathbb{R})$ is the borel $\sigma$-algebra of $\mathbb{R}$. Many common properties of random variables cease to make sense if it isn't. One consequence is that singletons are measurable so it makes sense to talk about $X=5$. This need not be the case for more general random variables. 
 		\end{remark}
 		
 		\begin{remark}
@@ -282,7 +282,7 @@
 		\end{definition}
 		
 		\begin{definition}[Distribution]\index{distribution}
-			Let $X$ be a random variable $X:(\Omega, \mathcal{F}, P)\to (S, \Sigma)$; the \emph{Distribution} of $X$ is the probability measure $\mu_X$ on $(S, \Sigma)$ defined by $A\in\Sigma$, $\mu_X(A)=P(X^{-1}(A))$.  
+			Let $X$ be a random variable $X:(\Omega, \mathcal{F}, P)\to (S, \Sigma)$; the \emph{distribution} of $X$ is the probability measure $\mu_X$ on $(S, \Sigma)$ defined by $A\in\Sigma$, $\mu_X(A)=P(X^{-1}(A))$.  
 		\end{definition}
 		
 		\begin{definition}[Discrete Distribution]\index{distribution!discrete}
@@ -290,7 +290,11 @@
 		\end{definition}
 		
 		\begin{definition}[Continuous Distribution]\index{distribution!continuous}
-			Let $X$ be a random variable, we say that $X$ has a continuous distribution if $X$ is not discrete. 
+			Let $X$ be a random variable; if there exists a nonnegative function $f$, defined on the real line, such that for every interval of real numbers $[a,b]$,
+			\begin{alignat}{4}
+				P(a\leq X \leq b)=\int_a^b f(x)~dx
+			\end{alignat}
+			then $X$ is said to have a continuous distribution
 		\end{definition}
 
 		\begin{definition}[Probability Function]\index{probability function}\index{probability mass function}
@@ -302,7 +306,7 @@
 		\end{definition}
 		
 		\begin{definition}[Support]\index{support}
-			Let $X$ be a discrete random variable with distribution $\mu_X=P(X=x)$, then the support of $X$ is the closure of the set $\set{x\mid \mu_X(x)>0}$. 
+			Let $X$ be a discrete random variable with distribution $f(x)=\mu_X(\set{x})=P(X=x)$, where $f$ is the distribution, then the support of $X$ is the closure of the set $\set{x\mid \mu_X(\set{x})>0}$. 
 		\end{definition}
 
 		\begin{definition}[Bernoulli Random Variable]\index{Bernoulli random variable}\index{random variable!Bernoulli}
@@ -335,7 +339,7 @@
 		\end{definition}
 		
 		\begin{remark}
-			The binomial random variable with parameters $n$ and $p$ arrises when you have a sequence of $n$ Bernoulli random variables with probability $p$ of success and the random binomial random variable gives the probability of observing precisely $x$ successes. 
+			The binomial random variable with parameters $n$ and $p$ arises when you have a sequence of $n$ Bernoulli random variables with probability $p$ of success and the random binomial random variable gives the probability of observing precisely $x$ successes. 
 		\end{remark}
 
 	\section{Continuous Random Variables}
@@ -343,7 +347,7 @@
 		\subsection{The Probability Density Function}
 			
 			\begin{definition}[Continuous Random Variable]\index{random variable!continuous}
-				We say that a random variable $X$ is a \emph{continuous random variable} if there exists a nonnegative function $\mu_X$, defined on $\mathbb{R}$ such that for every interval of real numbers the probability that $X$ takes a value in the interval is
+				We say that a random variable $X$ is a \emph{continuous random variable} if there exists a nonnegative function $f(x)$, defined on $\mathbb{R}$ such that for every interval of real numbers the probability that $X$ takes a value in the interval is
 				\begin{alignat}{4}
 					P(a\leq X \leq b)=\int_a^bf(x)dx
 				\end{alignat}
@@ -362,18 +366,21 @@
 			\end{alignat}
 		\end{definition}	
 
-		\begin{theorem}
+		\begin{theorem}\label{Theorem:3:1}
 			A distribution function is non-decreasing
 		\end{theorem}
 		
-		\begin{theorem}
+		\begin{theorem}\label{Theorem:3:2}
 			For a distribution function $F$, $\lim_{x\to-\infty}F(x)=0$ and $\lim_{x\to\infty}F(x)=1$
 		\end{theorem}
 
-		\begin{theorem}
+		\begin{theorem}label{Theorem:3:3}
 			Distribution functions are continuous from the right.
 		\end{theorem}
 		
+		\begin{remark}
+			Theorems \ref{Theorem:3:1} through \ref{Theorem:3:3} characterize CDFs; conversely any function for which these theorems holds is a distribution. 
+		\end{remark}
 		\begin{remark}
 			A remarkable number of computations are made easy by the Fundamental Theorem of Calculus. 
 		\end{remark}
@@ -381,11 +388,11 @@
 		\begin{theorem}
 			Let $X$ have a continuous distribution with density $f$ and distribution $F$, then $F$ is continuous and 
 			\begin{alignat}{4}
-				F(x)=\int_{\mathbb{R}}f(t)dt
+				F(x)=\int_{-\infty}^xf(t)dt
 			\end{alignat}
 			and
 			\begin{alignat}{4}
-				\frac{dF(x)}{dt} = f(x)
+				\frac{dF(x)}{dx} = f(x)
 			\end{alignat}
 		\end{theorem}
 
@@ -398,13 +405,13 @@
 		\end{definition}
 		
 		\begin{remark}
-			The median is special in that there is an alternative definition of the median. While the 50th percentile is the smallest value $x$ such that $F(x)\geq p$ it may be that there's an interval of values such that $F(x)=p$. In that case some people take the middle of the interval to be the median. 
+			The median is special in that there is an alternative definition of the median. While the 50th percentile is the smallest value $x$ such that $F(x)\geq 0.5$ it may be that there's an interval of values such that $F(x)=0.5$. In that case some people take the middle of the interval to be the median. 
 		\end{remark}
 		
 		
 	\section{Bivariate Distributions}
 		\begin{definition}[Joint Distribution]\index{joint distribution}\index{distribution!joint}
-			Let $(\Omega, \mathcal{F}, P)$ be a probability space and let $X, Y$ be two real random variables on $\Omega$; then the map $(X, Y): \Omega \to \mathbb{R}^2$ is measurable. For every Borel set $C\in\mathcal{B}{(\mathbb{R}^2)}$ the preimage $\set{(X, Y)\in C} = \set{\omega\in\Omega\mid (X(\omega), Y(\omega))\in C)}\in\mathcal{F}$ is an event. 
+			Let $(\Omega, \mathcal{F}, P)$ be a probability space and let $X, Y$ be two real random variables on $\Omega$; then the map $(X, Y): \Omega \to \mathbb{R}^2$ is measurable. For every Borel set $C\in\mathcal{B}(\mathbb{R}^2)$ the preimage $\set{(X, Y)\in C} = \set{\omega\in\Omega\mid (X(\omega), Y(\omega))\in C)}\in\mathcal{F}$ is an event. 
 			
 			The \emph{joint distribution} of $X$ and $Y$ is the probability measure $\mu_{X, Y}$ on $(\mathbb{R}^2, \mathcal{B}(\mathbb{R}^2))$ defined by 
 			\begin{alignat}{4}
@@ -413,7 +420,194 @@
 			for $C\in\mathcal{B}(\mathbb{R}^2)$
 		\end{definition}
 
+		\begin{theorem}
+			Suppose that two random variables $X$ and $Y$ on the same probability space each have a discrete distribution; then $X$ and $Y$ have a discrete joint distribution. 
+		\end{theorem}
 
+		\begin{definition}[Joint Probability Function]\index{joint probability function}
+			The \emph{joint probability function} or the \emph{joint p.f.} of $X$ and $Y$ (defined on the same probability space) is defined as the function $f$ on the \emph{xy}-plane,
+			\begin{alignat}{4}
+				f(x, y)=P(X = x, ~Y = y)
+			\end{alignat}
+		\end{definition}
+
+
+		\begin{definition}[Continuous Joint Distribution]\index{continuous joint distribution}\index{joint p.d.f}
+			Two random variables $X$ and $Y$ (defined on the same probability space) have a \emph{continuous joint distribution} if there exists a nonnegative function $f$ defined over the $xy$-plane such that for every subset $C$ of the plane,
+			\begin{alignat}{4}
+				P[(X, Y)\in C] = \int\int_C f(x, y)~dx~dy
+			\end{alignat}
+			if the integral exists. The function $f$ is called the \emph{joint probability density function} of $X$ and $Y$. The closure of the set $\set{(x, y)\in\mathbb{R}^2\mid f(x, y)>0}$ is called the \emph{support} of $(X, Y)$. 
+		\end{definition}
+		
+		\begin{theorem}
+			A joint p.d.f. must satisfy the following two conditions:
+			\begin{alignat}{4}
+				f(x, y)\geq 0 \textrm{ for } x\in\mathbb{R} \textrm{ and } y\in\mathbb{R}
+			\end{alignat}
+			and
+			\begin{alignat}{4}
+				\int_{-\infty}^\infty \int_{-\infty}^\infty f(x, y)~dx~dy = 1
+			\end{alignat}
+		\end{theorem}
+		
+		\begin{theorem}
+			For every continuous joint distribution on the $xy$-plane, the following two statements hold:
+			\begin{enumerate}
+				\item Every individual point, and every infinite sequence of points, in the $xy$-plane has probability $0$.
+				\item Let $\gamma$ be a a continuous curve $\gamma: [s_1, s_2]\to \mathbb{R}^2$ of finite length then the image $\gamma([s_1, s_2])$ has probability zero; that is
+				\begin{alignat}{4}
+					P( (X, Y)\in\gamma([s_1, s_2])) = 0
+				\end{alignat}
+			\end{enumerate}
+		\end{theorem}
+		
+		\begin{definition}[Joint Distribution Function]\index{joint distribution function}
+			The \emph{joint distribution function} of two random variables $X$ and $Y$ is defined as the function $F$ such that for all values of $x$ and $y$
+			\begin{alignat}{4}
+				F(x, y) = P(X \leq x, Y \leq y)
+			\end{alignat}		
+		\end{definition}
+		
+		\begin{remark}
+			If the joint cumulative distribution of two arbitrary random variables is $F$ then by the Fundamental Theorem of Calculus we can see that 
+			\begin{alignat}{4}
+				P(a < X \leq b, c < y \leq d) = F(b, d) - F(a, d) - F(b, c) + F(a, c)
+			\end{alignat}
+			This defines the distribution on rectangles from which we can construct more interesting sets.  
+		\end{remark}
+
+		\begin{theorem}
+			Let $X$ and $Y$ have a joint distribution $F$; the distribution $F_1$ of a single random variable $X$ is
+			\begin{alignat}{4}
+				F_1(x)=\lim_{y\to\infty}F(x, y)
+			\end{alignat}
+		\end{theorem}
+
+	\section{Problems}
+	
+		\subsection{\S 3.4}
+		
+			\begin{problem}[\S 3.4 \#1]
+				Suppose that the joint density of a par of random variables $(X, Y)$ is constant on the rectangle where $0 \leq x \leq 2$ and $0\leq y \leq 1$ and suppose that the density is $0$ off the rectangle;
+				\begin{enumerate}
+					\item Find the constant value of the density on the rectangle.
+					\item Find $P( X \geq Y)$. 
+				\end{enumerate}
+				\begin{proof}
+					We find 
+					\begin{enumerate}
+						\item The area of the rectangle is $2\cdot 1 = 2$ and the total probability is $1$ and so the constant density is $0.5$.
+						\item We note that $X\geq Y$ is the area below the diagonal $y=x$. Picture the rectangle with one corner at the origin and a height of 1 and a width of 2, then the diagonal cuts through half the square from $(0, 0)$ to $(1, 1)$ and the entire square from $(1, 0)$ to $(2, 1)$ is included; so $P(X\geq Y)=0.75$. 
+					\end{enumerate}
+				\end{proof}
+			\end{problem}
+			
+			\begin{problem}[\S 3.4 \# 3]
+				Suppose that $X$ and $Y$ have a discrete joint distribution for which the joint density is defined as follows
+				\begin{alignat}{4}
+					f(x, y) = \begin{cases}
+						c |x + y|,& \textrm{ for } x = -2, -1, 0, 1, 2 \\
+						&\textrm{ and } y = -2, -1, 0, 1, 2 \\
+						0,&\textrm{otherwise}
+					\end{cases}
+				\end{alignat}
+				Determine
+				\begin{enumerate}
+					\item The value of the constant $c$
+					\item $P(X = 0, Y = -2)$
+					\item $P(X = 1)$
+					\item $P(|X - Y| \leq 1)$
+				\end{enumerate}
+				\begin{proof}
+					We first compute the table of $|x + y|$
+					\begin{table}[h]
+						\centering
+							\begin{tabular}{c|ccccc}
+								$x \backslash y$ & $-2$ & $-1$ & $0$ & $1$ & $2$ \\
+								\hline
+								$-2$ & 4 & 3 & 2 & 1 & 0 \\
+								$-1$ & 3 & 2 & 1 & 0 & 1 \\
+								$0$  & 2 & 1 & 0 & 1 & 2 \\
+								$1$  & 1 & 0 & 1 & 2 & 3 \\
+								$2$  & 0 & 1 & 2 & 3 & 4 \\
+							\end{tabular}
+					\end{table} \\
+					and note the sum of all these values is $40$. 
+					
+					Likewise, we  compute the table of $|x - y|$
+					\begin{table}[h]
+						\centering
+							\begin{tabular}{c|ccccc}
+								$x \backslash y$ & $-2$ & $-1$ & $0$ & $1$ & $2$ \\
+								\hline
+								$-2$ & 0 & 1 & 2 & 3 & 4 \\
+								$-1$ & 1 & 0 & 1 & 2 & 3 \\
+								$0$  & 2 & 1 & 0 & 1 & 2 \\
+								$1$  & 3 & 2 & 1 & 0 & 1 \\
+								$2$  & 4 & 3 & 2 & 1 & 0 \\
+							\end{tabular}
+					\end{table} \\
+					
+					for the last part. 
+
+
+					\begin{enumerate}
+						\item The normalizing constant $c=\frac{1}{40}$.
+						\item $P(X=0, Y= -2) = \frac{1}{20}$. 
+						\item $P(X=1) = \frac{7}{40}$. 
+						\item $(|X - Y| \leq 1) = \frac{28}{40} = \frac{7}{10}$. 
+					\end{enumerate}
+				\end{proof}
+			\end{problem}
+
+			\begin{problem}[\S 3.4 \# 5]
+				Suppose that the joint distribution of two continuous random variables $X$ and $Y$ is as follows:
+				\begin{alignat}{4}
+					f(x, y) = \begin{cases}
+						c \left(x^2 + y\right),& \textrm{for } 0\leq y \leq 1-x^2, \\
+						0,&\textrm{otherwise}
+					\end{cases}
+				\end{alignat}
+				Determine:
+				\begin{enumerate}
+					\item The value of the normalizing constant $c$.
+					\item $P\left(0\leq X \leq \frac{1}{2}\right)$.
+					\item $P(Y\leq X + 1)$.
+					\item $P\left(Y=X^2\right)$.
+				\end{enumerate}
+				\begin{proof}
+					We first consider the graph of $y=1-x^2$. This is a quadratic curve with vertex at $(0, 1)$. This intersects the $x$-axis where $y=0$ at $x=-1$ and $x=1$.  
+					\begin{enumerate}
+						\item We integrate the density over the area, which is the area above the $x$-axis and under the quadratic $1-x^2$ and note that it must be equal to 1
+							\begin{alignat}{4}
+								\int_{-1}^1\int_{0}^{1-x^2} c\left(x^2+y\right)~dy~dx & = c \int_{-1}^1 \left[ x^2y + \frac{y^2}{2}\right]_{y=0}^{y=1-x^2} ~ dx \\
+									&= c\int_{-1}^1\left[ x^2(1-x^2)+\frac{\left(1-x^2\right)^2}{2} \right] ~ dx \\
+									&=c\int_{-1}^1 \left(x^2 - x^4\right) + \frac{1}{2}\left(1-2x^2+x^4\right)~dx \\
+									&=\frac{c}{2}\int_{-1}^1 2x^2-2x^4+1-2x^2+x^4 ~ dx \\
+									&=\frac{c}{2} \int_{-1}^1 -x^4+1 ~ dx \\
+									&=\frac{c}{2} \left[ -\frac{1}{5}x^5 + x\right]_{x=-1}^1 \\
+									&=\frac{c}{2} \left[ 1-\frac{1}{5} +1 - \frac{1}{5}  \right] \\
+									&=\frac{c}{2} \frac{8}{5} \\
+									&={c}\frac{4}{5}
+							\end{alignat}
+							and so $c=\frac{5}{4}$. 
+						\item To compute $P\left(0\leq X \leq \frac{1}{2}\right)$ we integrate the density over the bounds
+							\begin{alignat}{4}
+								\int_{0}^\frac{1}{2}\int_{0}^{1-x^2} \frac{5}{4}\left(x^2+y\right)~dy~dx &=\frac{5}{4} \int_{0}^\frac{1}{2} \left[ x^2y + \frac{y^2}{2}\right]_{y=0}^{y=1-x^2} ~ dx \\
+									&= \frac{5}{4}\int_{0}^\frac{1}{2}\left[ x^2(1-x^2)+\frac{\left(1-x^2\right)^2}{2} \right] ~ dx \\
+									&=\frac{5}{4}\int_{0}^\frac{1}{2}\ \left(x^2 - x^4\right) + \frac{1}{2}\left(1-2x^2+x^4\right)~dx \\
+									&=\frac{5}{8}\int_{0}^\frac{1}{2}\ 2x^2-2x^4+1-2x^2+x^4 ~ dx \\
+									&=\frac{5}{8} \int_{0}^\frac{1}{2}\ -x^4+1 ~ dx \\
+									&=\frac{5}{8} \left[ -\frac{1}{5}x^5 + x\right]_{x=0}^{\frac{1}{2}} \\
+									&=\frac{5}{8} \left[\frac{1}{2} - \frac{1}{5}\frac{1}{32} \right]\\
+									&=\frac{1}{8}\left[\frac{5}{2}-\frac{1}{32}\right] \\
+									&=\frac{5}{16}-\frac{1}{256} \\
+									&=\frac{79}{256}
+							\end{alignat}
+					\end{enumerate}
+				\end{proof}
+			\end{problem}
 
 \chapter{Estimation}
 
@@ -422,14 +616,97 @@
 		\begin{definition}[Statistical Model]\index{statistical model}
 			A \emph{statistical model} consists of
 			\begin{itemize}
-				\item an identification of random variables of interest
-				\item a specification of a join distribution or family of possible joint distributions for the observable random variables 
+				\item an identification of random variables of interest (observable and hypothetically observable)
+				\item a specification of a joint distribution or family of possible joint distributions for the observable random variables 
 				\item the identification of any parameters of those distributions that are assumed unknown and possibly hypothetically observable
 				\item and if desired, a specification for the (joint) distribution for the unknown parameter(s)
 			\end{itemize}
 			When we treat the unknown parameters $\theta$ as random, then the joint distribution of the observable random variables indexed by $\theta$ is understood as the conditional distribution of the observable random variables given $\theta$. 
 		\end{definition}
 		
+		\begin{definition}[Statistical Inference]\index{statistical inference}
+			A \emph{statistical inference} is a procedure that produces a probabilistic statement about some or all parts of a statistical model.
+		\end{definition}
+		
+		\begin{definition}[Parameter]\index{parameter}
+			In a problem of statistical inference, a characteristic or combination of characteristics that determine the joint distribution for the random variables of interest is called a parameter of the distribution. The set $\Theta$ of all possible values of a parameter $\theta$ or a vector of parameters $\set{\theta_i}_{i=1}^k$ is called the \emph{parameter space}. 
+		\end{definition}
+
+		\begin{remark}
+			In a Bayesian setting where the unknown parameter $\theta$ is treated as a random variable we note that $\Omega$ is the sample space. We equip it with a $\sigma$-algebra $\mathcal{F}_{Omega}$, typically the Borel $\sigma$-algebra, and put a probability measure $\pi$ (the prior) on it; then $(\Omega, \mathcal{F}_\Omega, \pi)$ becomes a probability space and $\theta$ is a random variable on this space. 
+		\end{remark}
+		
+		\begin{remark}[General Classes of Problems]
+			There are several classes of problems:
+			\begin{itemize} 				
+				\item \emph{Prediction}: We try to predict the value of random variables that have not been observed. 
+				\item \emph{Decision}: We try to make a decision based on the value of random variables that have not been observed. That decision will be with respect to a loss function defined as part of the problem.
+				\item \emph{Experiment Design}: We make a decision on what experiment to conduct or the parameters of the experiment up to resource constraints. 
+			\end{itemize}
+		\end{remark}
+		
+		\begin{definition}[Statistic]\index{statistic}
+			Suppose we have a set of \emph{observable} random variables $\set{X_i}_{i=1}^k$ then an arbitrary real valued function of $k$ real variables $T=r(X_1, \dots, X_k)$ is a statistic. 
+		\end{definition}
+		
+		\begin{remark}
+			NB: A statistic differs from a random variable as a function of $k$ random variable in that the it is a function of the data alone.
+		\end{remark}
+		
+	\section{Prior and Posterior Distributions}
+	
+		\begin{definition}[Prior Distribution]\index{distribution!prior}\index{prior distribution}
+			Suppose that we have a statistical model with a parameter $\theta$. We may treat $\theta$ as a random variable; then the distribution we assign to $\theta$ before observing other random variables of interesting in the model is called the \emph{prior distribution}
+		\end{definition}
+		
+		\begin{remark}
+			DeGroot and Schevrish commonly use $\xi(\theta)$ for the prior, other texts more commonly use $\pi(\theta)$ for the prior. In some contexts $p(\theta)$ is also used. 
+		\end{remark}
+		
+		\begin{definition}[Posterior Distribution]\index{distribution!posterior}\index{posterior distribution}
+			Consider a statistical inference problem with parameter $\theta$ and random variables $\set{X_\alpha}_{\alpha\in I}$ to be observed. The conditional distribution of $\theta$ given $\set{X_\alpha}_{\alpha\in I}$ is called the \emph{posterior distribution} of $\theta$ and is denoted $\xi(\theta\mid \set{X_\alpha}_{\alpha\in I})$
+		\end{definition}
+		
+		\begin{remark}
+			While there's a whole theory of posteriors with respect to large sets of observations we will typically deal with finite sets here $\set{X_i}_{i=1}^k$. There are issues with some of the following definitions and theorems in an infinite context we won't deal with for now. 
+		\end{remark}
+		
+		\begin{theorem}
+			Suppose that the $n$ random variables $\set{X_i}_{i=1}^n$ form a random sample from a distribution for which the density is $f(x\mid\theta)$. Suppose also that the value of the parameter $\theta$ is unknown and the prior density of $\theta$ is $\xi(\theta)$; then the posterior p.d.f or p.f. of $\theta$ is 
+			\begin{alignat}{4}
+				\xi(\theta\mid \mathbf{x}) = \frac{f(x_1\mid\theta)\dots f(x_n\mid \theta)\xi(\theta)}{g_n(\mathbf{x})}
+			\end{alignat}
+			where $g_n$ is the marginal joint density of $\set{X_i}$. 
+		\end{theorem}
+		
+	\section{Problems}
+	
+		\subsection{\S 7.1}
+				
+			\begin{problem}[\S 7.1 \#1]
+				Identify the components of the statistical model in Example 7.1.3
+				\begin{proof}
+					\begin{itemize}
+						\item The random variables of interest are 
+						\begin{enumerate}
+							\item $\set{X_i}$, the set of Bernoulli random variables denoting the relapse result of patient $i$ given the event ${P=p}$, the parameter of the Bernoulli random variable indicating the probability of avoiding relapse. 
+						\end{enumerate}
+					\end{itemize}
+				\end{proof}
+			\end{problem}
+		
+		
+			\begin{problem}[\S 7.1 \# 2]
+				Identify two statistical inferences mentioned in Example 7.1.3
+				\begin{proof}
+					We identify
+					\begin{enumerate}
+						\item Computing the conditional distribution of $P$ given the observation. 
+						\item The conditional mean of $P$ given the observations. 
+					\end{enumerate}
+				\end{proof}
+			\end{problem}
+
 
 \printindex
 \end{spacing}
