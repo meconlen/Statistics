@@ -707,6 +707,23 @@
 			where $g_n$ is the marginal joint density of $\set{X_i}$. 
 		\end{theorem}
 		
+	\section{Prior and Posterior Distributions}
+		\begin{definition}[Prior Distribution]\index{prior distribution}\index{distribution!prior}
+			Suppose that one has a statistical model with parameter $\theta$, If one treats $\theta$ as random then the distribution that one assigns to $\theta$ before observing the other random variables of interest is called its \emph{prior distribution}. We shall commonly use the symbol $\xi(\theta)$ to denote the prior density\index{prior density}\index{density!prior}. 	
+		\end{definition}
+		
+		\begin{definition}[Posterior Distribution]\index{posterior distribution}\index{distribution!posterior}
+			Consider a statistical inference problem with parameter $\theta$ and random variables $\set{X_i}_{i=1}^n$ to be observed. The conditional distribution of $\theta$ given $\set{X_i}_{i=1}^n$ is called the \emph{posterior distribution} of $\theta$. The density of $\theta$ given $\set{X_i}_{i=1}^n$ is called the \emph{posterior density} of $\theta$ and is denoted $\xi(\theta\mid x_1, \dots, x_n)$. 
+		\end{definition}
+		
+		\begin{theorem}
+			Suppose that $\set{X_i}_{i=1}^n$ form a random sample from a distribution for which the density is $f(x\mid \theta)$. Suppose that the value of the parameter $\theta$ is unknown and the prior density of $\theta$ is $\xi(\theta)$; then the posterior density of $\theta$ is 
+			\begin{alignat}{4}
+				\xi(\theta\mid \mathbf{x})=\frac{f(x_1\mid\theta)\dots f(x_n\mid\theta)\xi(\theta)}{g_n(\mathbf{x})}
+			\end{alignat}
+			for $\theta\in\Omega$, where $g_n$ is the marginal joint density of $X_1, \dots, X_n$. 
+		\end{theorem}
+		
 	\section{Problems}
 	
 		\subsection{\S 7.1}
@@ -732,6 +749,15 @@
 						\item Computing the conditional distribution of $P$ given the observation. 
 						\item The conditional mean of $P$ given the observations. 
 					\end{enumerate}
+				\end{proof}
+			\end{problem}
+
+		\subsection{\S 7.2}
+		
+			\begin{problem}[\S 7.2 \#1]
+				Suppose that the lifetime of some lamps are modeled as iid exponential random variables with parameter $\theta$. Suppose we believe that the prior distribution of $\theta$ is the Gamma distribution with parameters $1$ and $5000$. Suppose we observe the following lifetimes; $2911$, $3403$, $3237$, $3509$, $3118$. What do we compute for $P(X_6 > 3000\mid \mathbf{x})$? 
+				\begin{proof}
+					We need to compute the probability that $X_6 > 3000$ for some exponential distribution parameterized by $\theta$ where we 
 				\end{proof}
 			\end{problem}
 
